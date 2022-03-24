@@ -154,8 +154,8 @@ class _VerificatioCode extends State<VerificatioCode> {
                       : null,
                   child: Text('Confirm',
                       style: isActive
-                          ? TextStyle(color: Color.fromRGBO(54, 131, 252, 1))
-                          : TextStyle(
+                          ? const TextStyle(color: Color.fromRGBO(54, 131, 252, 1))
+                          : const TextStyle(
                               color: Color.fromRGBO(142, 143, 156, 1),
                             )),
                   style: isActive ? outlineButtonStyle1 : outlineButtonStyle2),

@@ -126,10 +126,10 @@ class _ResetPassEmailState extends State<ResetPassEmail> {
                 textAlign: TextAlign.start,
                 decoration: const InputDecoration(
                     hintText: 'Enter your Email ID',
-                    hintStyle: const TextStyle(
-                      color: const Color.fromRGBO(142, 143, 156, 1),
+                    hintStyle: TextStyle(
+                      color: Color.fromRGBO(142, 143, 156, 1),
                     ),
-                    border: const UnderlineInputBorder(
+                    border: UnderlineInputBorder(
                       borderSide: BorderSide(
                         color: Colors.grey,
                       ),
@@ -150,8 +150,8 @@ class _ResetPassEmailState extends State<ResetPassEmail> {
                       : null,
                   child: Text('Confirm',
                       style: isActive
-                          ? TextStyle(color: Color.fromRGBO(54, 131, 252, 1))
-                          : TextStyle(
+                          ? const TextStyle(color: Color.fromRGBO(54, 131, 252, 1))
+                          : const TextStyle(
                               color: Color.fromRGBO(142, 143, 156, 1),
                             )),
                   style: isActive ? outlineButtonStyle1 : outlineButtonStyle2),

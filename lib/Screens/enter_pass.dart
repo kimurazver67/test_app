@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:test_app/Screens/resetpass_screen.dart';
 import 'package:test_app/customIcons.dart';
 
 class EnterPass extends StatefulWidget {
@@ -173,17 +172,14 @@ class _EnterPass extends State<EnterPass> {
                       ? () {
                           setState(() {
                             isActive = false;
-                            if (formKey.currentState!.validate()) {
-                              Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (context) => ResetPassEmail()));
-                            } else {}
                           });
                         }
                       : null,
                   child: Text('Confirm',
                       style: isActive
-                          ? TextStyle(color: Color.fromRGBO(54, 131, 252, 1))
-                          : TextStyle(
+                          ? const TextStyle(
+                              color: Color.fromRGBO(54, 131, 252, 1))
+                          : const TextStyle(
                               color: Color.fromRGBO(142, 143, 156, 1),
                             )),
                   style: isActive ? outlineButtonStyle1 : outlineButtonStyle2),
