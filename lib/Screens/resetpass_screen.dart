@@ -94,12 +94,14 @@ class _ResetPassEmailState extends State<ResetPassEmail> {
             ),
             const Padding(
               padding: EdgeInsets.only(top: 71.78, left: 87, right: 87),
-              child: Text(
-                'Reset Password',
-                style: TextStyle(
-                    fontFamily: 'DMSans',
-                    fontSize: 24,
-                    fontWeight: FontWeight.w700),
+              child: FittedBox(
+                child: Text(
+                  'Reset Password',
+                  style: TextStyle(
+                      fontFamily: 'DMSans',
+                      fontSize: 24,
+                      fontWeight: FontWeight.w700),
+                ),
               ),
             ),
             const Padding(
@@ -150,7 +152,8 @@ class _ResetPassEmailState extends State<ResetPassEmail> {
                       : null,
                   child: Text('Confirm',
                       style: isActive
-                          ? const TextStyle(color: Color.fromRGBO(54, 131, 252, 1))
+                          ? const TextStyle(
+                              color: Color.fromRGBO(54, 131, 252, 1))
                           : const TextStyle(
                               color: Color.fromRGBO(142, 143, 156, 1),
                             )),
