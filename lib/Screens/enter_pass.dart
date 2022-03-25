@@ -10,9 +10,11 @@ class EnterPass extends StatefulWidget {
 
 class _EnterPass extends State<EnterPass> {
   late TextEditingController controllerText;
+
   bool isActive = false;
   bool _isVisible = false;
-  final formKey = GlobalKey<FormState>();
+
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   final ButtonStyle outlineButtonStyle1 = ButtonStyle(
     textStyle: MaterialStateProperty.all(
@@ -72,121 +74,130 @@ class _EnterPass extends State<EnterPass> {
 
   @override
   Widget build(BuildContext context) {
-    final GlobalKey<State> scaffoldKey = GlobalKey<ScaffoldState>();
     return Scaffold(
-      body: SafeArea(
-          child: Padding(
-        padding: const EdgeInsets.only(left: 20, right: 20),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(
-                top: 127,
-              ),
-              child: Container(
-                height: 80.22,
-                width: 153.07,
-                decoration: const BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage('assets/images/Logo 3.png'),
+      body: Form(
+        key: formKey,
+        child: SafeArea(
+            child: Padding(
+          padding: const EdgeInsets.only(left: 20, right: 20),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(
+                  top: 127,
+                ),
+                child: Container(
+                  height: 80.22,
+                  width: 153.07,
+                  decoration: const BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage('assets/images/Logo 3.png'),
+                    ),
                   ),
                 ),
               ),
-            ),
-            const Padding(
-              padding: EdgeInsets.only(top: 71.78, left: 87, right: 87),
-              child: Text(
-                'New Password',
-                style: TextStyle(
-                    fontFamily: 'DMSans',
-                    fontSize: 24,
-                    fontWeight: FontWeight.w700),
+              const Padding(
+                padding: EdgeInsets.only(top: 71.78, left: 87, right: 87),
+                child: FittedBox(
+                  child: Text(
+                    'New Password',
+                    style: TextStyle(
+                        fontFamily: 'DMSans',
+                        fontSize: 24,
+                        fontWeight: FontWeight.w700),
+                  ),
+                ),
               ),
-            ),
-            const Padding(
-              padding: EdgeInsets.only(top: 6),
-              child: Text(
-                "Enter your new password. Please try to use both numbers and english letters. You need to enter between 6 to 10 characters.",
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                    color: Color.fromRGBO(149, 149, 149, 1),
-                    fontFamily: 'DMSans',
-                    fontWeight: FontWeight.w400,
-                    fontSize: 18),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 40, left: 20, right: 20),
-              child: TextFormField(
-                  key: formKey,
-                  validator: (value) {
-                    if (value!.isEmpty || value.length < 6) {
-                      return 'Enter correct password';
-                    } else {}
-                  },
-                  controller: controllerText,
-                  style: const TextStyle(
+              const Padding(
+                padding: EdgeInsets.only(top: 6),
+                child: Text(
+                  "Enter your new password. Please try to use both numbers and english letters. You need to enter between 6 to 10 characters.",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                      color: Color.fromRGBO(149, 149, 149, 1),
                       fontFamily: 'DMSans',
-                      fontWeight: FontWeight.w500,
+                      fontWeight: FontWeight.w400,
                       fontSize: 18),
-                  textAlign: TextAlign.start,
-                  maxLength: 10,
-                  obscureText: !_isVisible,
-                  obscuringCharacter: '*',
-                  enableSuggestions: false,
-                  autocorrect: false,
-                  decoration: InputDecoration(
-                      counterText: "",
-                      hintText: 'New Password',
-                      hintStyle: const TextStyle(
-                        color: Color.fromRGBO(142, 143, 156, 1),
-                      ),
-                      border: const UnderlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Colors.grey,
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 40, left: 20, right: 20),
+                child: TextFormField(
+                    validator: validatePass,
+                    controller: controllerText,
+                    style: const TextStyle(
+                        fontFamily: 'DMSans',
+                        fontWeight: FontWeight.w500,
+                        fontSize: 18),
+                    textAlign: TextAlign.start,
+                    maxLength: 10,
+                    obscureText: !_isVisible,
+                    obscuringCharacter: '*',
+                    enableSuggestions: false,
+                    autocorrect: false,
+                    decoration: InputDecoration(
+                        counterText: "",
+                        hintText: 'New Password',
+                        hintStyle: const TextStyle(
+                          color: Color.fromRGBO(142, 143, 156, 1),
                         ),
-                      ),
-                      suffixIcon: IconButton(
-                        onPressed: () {
-                          setState(() {
-                            _isVisible = !_isVisible;
-                          });
-                        },
-                        icon: _isVisible
-                            ? const Icon(
-                                MyFlutterApp.eye_show_filled_icon_200617,
-                                color: Color.fromRGBO(54, 131, 252, 1),
-                              )
-                            : const Icon(
-                                MyFlutterApp.eye_show_filled_icon_200617,
+                        border: const UnderlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Colors.grey,
+                          ),
+                        ),
+                        suffixIcon: IconButton(
+                          onPressed: () {
+                            setState(() {
+                              _isVisible = !_isVisible;
+                            });
+                          },
+                          icon: _isVisible
+                              ? const Icon(
+                                  MyFlutterApp.eye_show_filled_icon_200617,
+                                  color: Color.fromRGBO(54, 131, 252, 1),
+                                )
+                              : const Icon(
+                                  MyFlutterApp.eye_show_filled_icon_200617,
+                                  color: Color.fromRGBO(142, 143, 156, 1),
+                                ),
+                        ))),
+              ),
+              const Spacer(),
+              Padding(
+                padding: const EdgeInsets.only(bottom: 67),
+                child: OutlinedButton(
+                    onPressed: isActive
+                        ? () {
+                            setState(() {
+                              if (formKey.currentState!.validate()) {
+                                return;
+                              } else {
+                                return;
+                              }
+                            });
+                          }
+                        : null,
+                    child: Text('Confirm',
+                        style: isActive
+                            ? const TextStyle(
+                                color: Color.fromRGBO(54, 131, 252, 1))
+                            : const TextStyle(
                                 color: Color.fromRGBO(142, 143, 156, 1),
-                              ),
-                      ))),
-            ),
-            const Spacer(),
-            Padding(
-              padding: const EdgeInsets.only(bottom: 67),
-              child: OutlinedButton(
-                  onPressed: isActive
-                      ? () {
-                          setState(() {
-                            isActive = false;
-                          });
-                        }
-                      : null,
-                  child: Text('Confirm',
-                      style: isActive
-                          ? const TextStyle(
-                              color: Color.fromRGBO(54, 131, 252, 1))
-                          : const TextStyle(
-                              color: Color.fromRGBO(142, 143, 156, 1),
-                            )),
-                  style: isActive ? outlineButtonStyle1 : outlineButtonStyle2),
-            )
-          ],
-        ),
-      )),
+                              )),
+                    style:
+                        isActive ? outlineButtonStyle1 : outlineButtonStyle2),
+              )
+            ],
+          ),
+        )),
+      ),
     );
   }
+}
+
+String? validatePass(String? formPass) {
+  if (formPass!.length < 6) return 'Incorrect pass';
+  return null;
 }

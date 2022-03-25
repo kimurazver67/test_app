@@ -12,6 +12,7 @@ class ResetPassEmail extends StatefulWidget {
 class _ResetPassEmailState extends State<ResetPassEmail> {
   late TextEditingController controllerText;
   bool isActive = false;
+  final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
 
   final ButtonStyle outlineButtonStyle1 = ButtonStyle(
     textStyle: MaterialStateProperty.all(
@@ -72,96 +73,113 @@ class _ResetPassEmailState extends State<ResetPassEmail> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-          child: Padding(
-        padding: const EdgeInsets.only(left: 20, right: 20),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(
-                top: 127,
-              ),
-              child: Container(
-                height: 80.22,
-                width: 153.07,
-                decoration: const BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage('assets/images/Logo 3.png'),
+      body: Form(
+        key: _formkey,
+        child: SafeArea(
+            child: Padding(
+          padding: const EdgeInsets.only(left: 20, right: 20),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(
+                  top: 127,
+                ),
+                child: Container(
+                  height: 80.22,
+                  width: 153.07,
+                  decoration: const BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage('assets/images/Logo 3.png'),
+                    ),
                   ),
                 ),
               ),
-            ),
-            const Padding(
-              padding: EdgeInsets.only(top: 71.78, left: 87, right: 87),
-              child: FittedBox(
-                child: Text(
-                  'Reset Password',
-                  style: TextStyle(
-                      fontFamily: 'DMSans',
-                      fontSize: 24,
-                      fontWeight: FontWeight.w700),
+              const Padding(
+                padding: EdgeInsets.only(top: 71.78, left: 87, right: 87),
+                child: FittedBox(
+                  child: Text(
+                    'Reset Password',
+                    style: TextStyle(
+                        fontFamily: 'DMSans',
+                        fontSize: 24,
+                        fontWeight: FontWeight.w700),
+                  ),
                 ),
               ),
-            ),
-            const Padding(
-              padding: EdgeInsets.only(top: 6),
-              child: Text(
-                "If you've forgotten your password enter your e-mail address and we send you a verification code, then you can reset your password.",
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                    color: Color.fromRGBO(149, 149, 149, 1),
-                    fontFamily: 'DMSans',
-                    fontWeight: FontWeight.w400,
-                    fontSize: 18),
+              const Padding(
+                padding: EdgeInsets.only(top: 6),
+                child: Text(
+                  "If you've forgotten your password enter your e-mail address and we send you a verification code, then you can reset your password.",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                      color: Color.fromRGBO(149, 149, 149, 1),
+                      fontFamily: 'DMSans',
+                      fontWeight: FontWeight.w400,
+                      fontSize: 18),
+                ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 40, left: 20, right: 20),
-              child: TextField(
-                keyboardType: TextInputType.emailAddress,
-                controller: controllerText,
-                style: const TextStyle(
-                    fontFamily: 'DMSans',
-                    fontWeight: FontWeight.w500,
-                    fontSize: 18),
-                textAlign: TextAlign.start,
-                decoration: const InputDecoration(
-                    hintText: 'Enter your Email ID',
-                    hintStyle: TextStyle(
-                      color: Color.fromRGBO(142, 143, 156, 1),
-                    ),
-                    border: UnderlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Colors.grey,
+              Padding(
+                padding: const EdgeInsets.only(top: 40, left: 20, right: 20),
+                child: TextFormField(
+                  validator: validateEmail,
+                  keyboardType: TextInputType.emailAddress,
+                  controller: controllerText,
+                  style: const TextStyle(
+                      fontFamily: 'DMSans',
+                      fontWeight: FontWeight.w500,
+                      fontSize: 18),
+                  textAlign: TextAlign.start,
+                  decoration: const InputDecoration(
+                      hintText: 'Enter your Email ID',
+                      hintStyle: TextStyle(
+                        color: Color.fromRGBO(142, 143, 156, 1),
                       ),
-                    )),
+                      border: UnderlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Colors.grey,
+                        ),
+                      )),
+                ),
               ),
-            ),
-            const Spacer(),
-            Padding(
-              padding: const EdgeInsets.only(bottom: 67),
-              child: OutlinedButton(
-                  onPressed: isActive
-                      ? () {
-                          setState(() {
-                            Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => const VerificatioCode()));
-                          });
-                        }
-                      : null,
-                  child: Text('Confirm',
-                      style: isActive
-                          ? const TextStyle(
-                              color: Color.fromRGBO(54, 131, 252, 1))
-                          : const TextStyle(
-                              color: Color.fromRGBO(142, 143, 156, 1),
-                            )),
-                  style: isActive ? outlineButtonStyle1 : outlineButtonStyle2),
-            )
-          ],
-        ),
-      )),
+              const Spacer(),
+              Padding(
+                padding: const EdgeInsets.only(bottom: 67),
+                child: OutlinedButton(
+                    onPressed: isActive
+                        ? () {
+                            setState(() {
+                              if (_formkey.currentState!.validate()) {
+                                Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (context) =>
+                                        const VerificatioCode()));
+                              }
+                            });
+                          }
+                        : null,
+                    child: Text('Confirm',
+                        style: isActive
+                            ? const TextStyle(
+                                color: Color.fromRGBO(54, 131, 252, 1))
+                            : const TextStyle(
+                                color: Color.fromRGBO(142, 143, 156, 1),
+                              )),
+                    style:
+                        isActive ? outlineButtonStyle1 : outlineButtonStyle2),
+              )
+            ],
+          ),
+        )),
+      ),
     );
   }
+}
+
+String? validateEmail(String? formEmail) {
+  if (formEmail!.isEmpty) return 'Email adress is required.';
+
+  String pattern = r'\w+@\w+.\w+';
+  RegExp regex = RegExp(pattern);
+  if (!regex.hasMatch(formEmail)) return 'Invalid Email adress format.';
+  return null;
 }
