@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:test_app/Screens/manage_connection_choose.dart';
 import 'package:test_app/customIcons.dart';
 
 class EnterPass extends StatefulWidget {
@@ -172,7 +173,9 @@ class _EnterPass extends State<EnterPass> {
                         ? () {
                             setState(() {
                               if (formKey.currentState!.validate()) {
-                                return;
+                                Navigator.of(context).push(MaterialPageRoute(
+                                    builder: ((context) =>
+                                        ManageConnectChoose())));
                               } else {
                                 return;
                               }
